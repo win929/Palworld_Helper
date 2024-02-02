@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="palworld_helper"
+        android:label="PALWORLD HELPER"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
