@@ -1,60 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-class Pals {
-  String index;
-  String name;
-  Pals({
-    required this.index,
-    required this.name,
-  });
-}
+import 'pals.dart';
 
 class PalGuidePage extends StatelessWidget {
   PalGuidePage({super.key});
 
-  List<Pals> pals = [
-    Pals(
-      index: '001',
-      name: '도로롱',
-    ),
-    Pals(
-      index: '002',
-      name: '까부냥',
-    ),
-    Pals(
-      index: '003',
-      name: '꼬꼬닭',
-    ),
-    Pals(
-      index: '004',
-      name: '큐룰리스',
-    ),
-    Pals(
-      index: '005',
-      name: '파이호',
-    ),
-    Pals(
-      index: '006',
-      name: '청부리',
-    ),
-    Pals(
-      index: '007',
-      name: '번개냥',
-    ),
-    Pals(
-      index: '008',
-      name: '몽지',
-    ),
-    Pals(
-      index: '009',
-      name: '불꽃밤비',
-    ),
-    Pals(
-      index: '010',
-      name: '펭키',
-    ),
-  ];
+  final List<Pals> pals = AllPals.pals;
 
   List<Widget> makedGuide(BuildContext context) {
     List<Widget> guide = [];
@@ -107,7 +58,10 @@ class PalGuidePage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'PALWORLD HELPER',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: "warhaven",
+          ),
         ),
         backgroundColor: Color.fromRGBO(28, 29, 31, 1),
         iconTheme: IconThemeData(color: Colors.white),

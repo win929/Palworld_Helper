@@ -1,13 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-class Pals {
-  String index;
-  String name;
-  Pals({
-    required this.index,
-    required this.name,
-  });
-}
+import 'pals.dart';
 
 class PalDetailPage extends StatefulWidget {
   int palIndex;
@@ -16,53 +9,14 @@ class PalDetailPage extends StatefulWidget {
     required this.palIndex,
   });
 
+  final List<Pals> pals = AllPals.pals;
+
   @override
   State<PalDetailPage> createState() => _PalDetailPageState();
 }
 
 class _PalDetailPageState extends State<PalDetailPage> {
-  List<Pals> pals = [
-    Pals(
-      index: '001',
-      name: '도로롱',
-    ),
-    Pals(
-      index: '002',
-      name: '까부냥',
-    ),
-    Pals(
-      index: '003',
-      name: '꼬꼬닭',
-    ),
-    Pals(
-      index: '004',
-      name: '큐룰리스',
-    ),
-    Pals(
-      index: '005',
-      name: '파이호',
-    ),
-    Pals(
-      index: '006',
-      name: '청부리',
-    ),
-    Pals(
-      index: '007',
-      name: '번개냥',
-    ),
-    Pals(
-      index: '008',
-      name: '몽지',
-    ),
-    Pals(
-      index: '009',
-      name: '불꽃밤비',
-    ),
-    Pals(
-      index: '010',
-      name: '펭키',
-    ),
-  ];
+  final List<Pals> pals = AllPals.pals;
 
   late Pals currentPal;
   int palIndex = 0;
@@ -168,7 +122,10 @@ class _PalDetailPageState extends State<PalDetailPage> {
         centerTitle: true,
         title: Text(
           'PALWORLD HELPER',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'warhaven',
+          ),
         ),
         backgroundColor: Color.fromRGBO(28, 29, 31, 1),
         iconTheme: IconThemeData(color: Colors.white),
@@ -182,129 +139,183 @@ class _PalDetailPageState extends State<PalDetailPage> {
                 color: Color.fromRGBO(28, 29, 31, 1),
                 child: Column(
                   children: [
-                    Text(
-                      '${currentPal.index}.${currentPal.name}',
-                      style: TextStyle(color: Colors.white, fontSize: 50),
-                    ),
-                    Image(
-                      image: AssetImage('assets/pals/${currentPal.index}.png'),
-                      height: 200,
-                    ),
                     Expanded(
+                      flex: 4,
                       child: Row(
                         children: [
                           Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
+                            flex: 4,
+                            child: Column(
+                              children: [
+                                Text(
+                                  'No.${currentPal.index}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontFamily: 'cookierun',
+                                  ),
+                                ),
+                                Text(
+                                  '${currentPal.name}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontFamily: 'cookierun',
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/pals/${currentPal.index}.png'),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
+                            flex: 6,
+                            child: Column(
+                              children: [
+                                BasicInfo(
+                                  title: '속성',
+                                  info: '${currentPal.property}',
+                                ),
+                                BasicInfo(
+                                  title: '식사량',
+                                  info: '${currentPal.food}/10',
+                                ),
+                                BasicInfo(
+                                  title: '드롭 아이템',
+                                  info: '${currentPal.dropItem}',
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
                     Expanded(
-                      child: Row(
+                      flex: 7,
+                      child: Column(
                         children: [
                           Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
+                            child: Row(
+                              children: [
+                                JobAptitude(
+                                  name: '불 피우기',
+                                  level: currentPal.levels[0],
+                                  icon: Icon(
+                                    Icons.local_fire_department,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                JobAptitude(
+                                  name: '관개',
+                                  level: currentPal.levels[1],
+                                  icon: Icon(
+                                    Icons.water_drop,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                                JobAptitude(
+                                  name: '파종',
+                                  level: currentPal.levels[2],
+                                  icon: Icon(
+                                    Icons.grass,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
+                            child: Row(
+                              children: [
+                                JobAptitude(
+                                  name: '발전',
+                                  level: currentPal.levels[3],
+                                  icon: Icon(
+                                    Icons.flash_on,
+                                    color: Colors.yellow,
+                                  ),
+                                ),
+                                JobAptitude(
+                                  name: '수작업',
+                                  level: currentPal.levels[4],
+                                  icon: Icon(
+                                    Icons.pan_tool,
+                                    color: Colors.orangeAccent,
+                                  ),
+                                ),
+                                JobAptitude(
+                                  name: '채집',
+                                  level: currentPal.levels[5],
+                                  icon: Icon(
+                                    Icons.spa,
+                                    color: CupertinoColors.activeGreen,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
+                            child: Row(
+                              children: [
+                                JobAptitude(
+                                  name: '벌목',
+                                  level: currentPal.levels[6],
+                                  icon: Icon(
+                                    Icons.forest,
+                                    color: Colors.brown,
+                                  ),
+                                ),
+                                JobAptitude(
+                                  name: '채굴',
+                                  level: currentPal.levels[7],
+                                  icon: Icon(
+                                    Icons.handyman,
+                                    color: Colors.blueGrey,
+                                  ),
+                                ),
+                                JobAptitude(
+                                  name: '제약',
+                                  level: currentPal.levels[8],
+                                  icon: Icon(
+                                    Icons.medication_liquid,
+                                    color: Colors.lightGreenAccent,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              color: Colors.red,
+                            child: Row(
+                              children: [
+                                JobAptitude(
+                                  name: '냉각',
+                                  level: currentPal.levels[9],
+                                  icon: Icon(
+                                    Icons.ac_unit,
+                                    color: Colors.lightBlueAccent,
+                                  ),
+                                ),
+                                JobAptitude(
+                                  name: '운반',
+                                  level: currentPal.levels[10],
+                                  icon: Icon(
+                                    Icons.inventory_2,
+                                    color: Colors.brown,
+                                  ),
+                                ),
+                                JobAptitude(
+                                  name: '목장',
+                                  level: currentPal.levels[11],
+                                  icon: Icon(
+                                    Icons.fence,
+                                    color: Colors.brown,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -345,6 +356,109 @@ class _PalDetailPageState extends State<PalDetailPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class BasicInfo extends StatelessWidget {
+  String title;
+  String info;
+  BasicInfo({
+    super.key,
+    required this.title,
+    required this.info,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(8),
+      color: Colors.white24,
+      width: 200,
+      child: Column(
+        children: [
+          Text(
+            '$title',
+            style: TextStyle(
+              fontSize: 20,
+              fontFamily: 'cookierun',
+              color: Colors.orangeAccent,
+            ),
+          ),
+          Text(
+            '$info',
+            style: TextStyle(
+              fontSize: 20,
+              fontFamily: 'cookierun',
+              color: Colors.white60,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Container showProperty(String name, int level, Icon icon) {
+  Container temp = Container(
+    margin: EdgeInsets.all(8),
+    color: Colors.grey,
+  );
+
+  if (level != 0) {
+    temp = Container(
+      margin: EdgeInsets.all(8),
+      color: Colors.grey,
+      child: Column(
+        children: [
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                icon,
+                Text(
+                  '$name',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'cookierun',
+                    color: Colors.amberAccent,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Text(
+              'Lv.$level',
+              style: TextStyle(
+                fontSize: 30,
+                fontFamily: 'cookierun',
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  return temp;
+}
+
+class JobAptitude extends StatelessWidget {
+  String name;
+  int level;
+  Icon icon;
+  JobAptitude({
+    super.key,
+    required this.name,
+    required this.level,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: showProperty(name, level, icon),
     );
   }
 }

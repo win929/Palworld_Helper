@@ -25,7 +25,10 @@ class _MapPageState extends State<MapPage> {
         centerTitle: true,
         title: Text(
           'PALWORLD HELPER',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: "warhaven",
+          ),
         ),
         backgroundColor: Color.fromRGBO(28, 29, 31, 1),
         iconTheme: IconThemeData(color: Colors.white),
